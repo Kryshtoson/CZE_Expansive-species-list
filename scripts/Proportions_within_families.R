@@ -22,7 +22,11 @@ bind_rows(traity,
          prop_plot = ifelse(expansive == 'expansive', prop, -prop)) |>
   ggplot(aes(reorder(family, prop_plot, 'min'), prop_plot)) +
   geom_bar(stat = 'identity', aes(fill = expansive), show.legend = F) +
-  geom_text(aes(label = paste0(family, ' (n=', n, ', ', round(prop, 1), '%)'),
+  #  geom_text(aes(label = paste0(family, ' (n=', n, ', ', round(prop, 1), '%)'),
+  #                hjust = ifelse(expansive != 'expansive', 1.05, -.05)), size = 2.5) +
+  geom_text(aes(label = ifelse(expansive == 'expansive',
+                               paste0('(n=', n, ', ', round(prop, 1), '%)'),
+                               paste0(family, ' (n=', n, ', ', round(prop, 1), '%)')),
                 hjust = ifelse(expansive != 'expansive', 1.05, -.05)), size = 2.5) +
   coord_flip() +
   scale_x_discrete(limits = rev) +

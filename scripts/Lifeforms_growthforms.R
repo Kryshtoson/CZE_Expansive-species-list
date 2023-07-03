@@ -7,7 +7,7 @@ bind_rows(traity,
           traity |>
             filter(expansive == 'expansive') |>
             mutate(expansive = 'no')) |>
-  select(species, expansive, `nanofanerofyt`:`terofyt`) |>
+  select(species, expansive, `nanophanerophyte`:`therophyte`) |>
   pivot_longer(-c(species,expansive)) |>
   group_by(expansive, name) |>
   count(value) |>
@@ -34,13 +34,15 @@ bind_rows(traity,
 bind_rows(lifeforms, lifehistory) |>
   ggplot(aes(reorder(name, prop_plot, 'min'), prop_plot)) +
   geom_bar(stat = 'identity', aes(fill = expansive), show.legend = F) +
-  geom_text(aes(label = paste0(name, ' (n=',n,', ', round(prop, 1), '%)'),
+  geom_text(aes(label = ifelse(expansive == 'expansive',
+                               paste0('(n=',n,', ', round(prop, 1), '%)'),
+                               paste0(name, ' (n=',n,', ', round(prop, 1), '%)')),
                 hjust = ifelse(expansive != 'expansive', 1.05, -.05)), size = 2.5) +
   coord_flip() +
   facet_wrap(~kind, scales = 'free', ncol = 1) +
   scale_x_discrete(limits = rev) +
-  scale_y_continuous(breaks = c(0, 20, -20, 40, -40, 60, -60, 80, -80),
-                     labels = c('0%', rep(c('20%', '40%', '60%', '80%'), each = 2)),
+  scale_y_continuous(breaks = c(0, 50, -50, 100, -100),
+                     labels = c('0%', rep(c('50%', '100%'), each = 2)),
                      expand = c(1.3, 1.3)) +
   scale_fill_manual(values = c('#FFC300', 'grey88')) +
   theme_bw() +
