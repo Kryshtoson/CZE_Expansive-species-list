@@ -11,7 +11,6 @@ traity |>
   pull(family) |>
   unique() -> selected
 
-
 bind_rows(traity,
           traity |> filter(expansive == 'expansive') |>
   mutate(expansive = 'no')) |>
@@ -23,7 +22,7 @@ bind_rows(traity,
          prop_plot = ifelse(expansive == 'expansive', prop, -prop)) |>
   ggplot(aes(reorder(family, prop_plot, 'min'), prop_plot)) +
   geom_bar(stat = 'identity', aes(fill = expansive), show.legend = F) +
-  geom_text(aes(label = paste0(family, ' (n=',n,',', round(prop, 1), '%)'),
+  geom_text(aes(label = paste0(family, ' (n=',n,', ', round(prop, 1), '%)'),
                 hjust = ifelse(expansive != 'expansive', 1.05, -.05)), size = 2.5) +
   coord_flip() +
   scale_x_discrete(limits = rev) +
@@ -38,6 +37,3 @@ bind_rows(traity,
         axis.ticks.y = element_blank())
 
 ggsave('figures\\Families.png', width = 8, height = 8)
-
-traity |> view()
-expanzky_per_region <- final_list |> select(species, '1`:`17`)
