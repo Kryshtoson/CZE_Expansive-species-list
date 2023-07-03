@@ -21,7 +21,7 @@ bind_rows(traity,
          prop_plot = ifelse(expansive == 'expansive', prop, -prop)) |>
   filter(family %in% selected) |>
   ggplot(aes(reorder(family, prop_plot, 'min'), prop_plot)) +
-  geom_bar(stat = 'identity', aes(fill = expansive), show.legend = F) +
+  geom_bar(stat = 'identity', aes(fill = expansive), show.legend = T) +
   #  geom_text(aes(label = paste0(family, ' (n=', n, ', ', round(prop, 1), '%)'),
   #                hjust = ifelse(expansive != 'expansive', 1.05, -.05)), size = 2.5) +
   geom_text(aes(label = ifelse(expansive == 'expansive',
@@ -33,10 +33,15 @@ bind_rows(traity,
   scale_y_continuous(breaks = c(0, 5, -5, 10, -10, 15, -15, 20, -20, 25, -25),
                      labels = c('0%', rep(c('5%', '10%', '15%', '20%', '25%'), each = 2)),
                      expand = c(.3, .3)) +
-  scale_fill_manual(values = c('#FFC300', 'grey88')) +
+  scale_fill_manual(values = c('#FFC300', 'grey88'),
+                    labels = c('Expansive species', 'Czech flora')) +
   theme_bw() +
   labs(y = 'Proportion of species') +
-  theme(axis.title.y = element_blank(),
+  theme(legend.position = c(1, 0),
+        legend.justification = c(1, 0),
+        legend.background = element_blank(),
+        legend.title = element_blank(),
+        axis.title.y = element_blank(),
         panel.grid = element_blank(),
         axis.text.y = element_blank(),
         axis.ticks.y = element_blank())
