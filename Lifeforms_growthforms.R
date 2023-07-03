@@ -1,4 +1,6 @@
-final_list <- read_xlsx(r'(../../../../OneDrive - MUNI/2022_Expanzky/Expanzky_final-list_2023-05-09.xlsx)')
+library(tidyverse)
+library(readxl)
+
 traity <- read_xlsx(r'(../../../../OneDrive - MUNI/2022_Expanzky/Expanzky_traity_2023-05-09.xlsx)')
 
 bind_rows(traity,
