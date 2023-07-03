@@ -14,12 +14,12 @@ bind_rows(traity,
           traity |>
             filter(expansive == 'expansive') |>
             mutate(expansive = 'no')) |>
-  filter(family %in% selected) |>
   group_by(family, expansive) |>
   count(name = 'n') |>
   group_by(expansive) |>
   mutate(prop = (n / sum(n)) * 100,
          prop_plot = ifelse(expansive == 'expansive', prop, -prop)) |>
+  filter(family %in% selected) |>
   ggplot(aes(reorder(family, prop_plot, 'min'), prop_plot)) +
   geom_bar(stat = 'identity', aes(fill = expansive), show.legend = F) +
   #  geom_text(aes(label = paste0(family, ' (n=', n, ', ', round(prop, 1), '%)'),
