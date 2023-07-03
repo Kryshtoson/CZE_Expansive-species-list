@@ -16,7 +16,7 @@ bind_rows(traity,
   ggplot(aes(expansive, value)) +
   geom_violin(aes(fill = expansive), alpha = 1, show.legend = F) +
   #geom_boxplot(aes(fill = expansive), ) +
-  geom_boxplot(width = 0.1, alpha = .2) +
+  geom_boxplot(width = 0.1, alpha = .2, notch = T) +
   scale_fill_manual(values = c('grey88', '#FFC300')) +
   facet_grid(~name, scales = 'free') +
   theme_bw() +
