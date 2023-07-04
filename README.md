@@ -33,7 +33,5 @@
 * `Dotaznik_counts.R`: creates `...`
   * Map of frequency of questionnaires
 
-
-* `Habitats.R`: no fucking idea
-* :::::::: Tabulka s biotopama first
-* 
+* `Habitats.R`: creates `...`
+  * Number of invasive species per habitat sorted by frequency

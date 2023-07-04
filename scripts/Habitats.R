@@ -14,25 +14,28 @@ tibble(path = list.files(r'(C:/Users/krystof/OneDrive - MUNI/2022_Expanzky/vyrob
   mutate(data = path |> map(~read_xlsx(.x, 2))) -> stuff
 
 order <- read_xlsx(r'(C:/Users/krystof/OneDrive - MUNI/2022_Expanzky/HabitatNames-2023-07-03.xlsx)')$Name
+prevodnik <- read_xlsx(r'(C:/Users/krystof/OneDrive - MUNI/2022_Expanzky/vyroba_seznamu/Prevodnik-druhy-status-2022-10-06.xlsx)') |>
+  select(species, species_new)
 
 stuff |>
   unnest() |>
   rename(species = `...2`) |>
-  filter(str_count(species, "\\w+") > 1) |>
-  mutate(species = gsub('\\*', '', species)) |>
-  select(species, region, `Vodní vegetace`:`Synantropní dřevinná vegetace, paseky a nálety`) |>
+  #filter(str_count(species, "\\w+") > 1) |>
+  #mutate(species = gsub('\\*', '', species)) |>
+  left_join(prevodnik) |>
+  select(species = species_new, region, `Vodní vegetace`:`Synantropní dřevinná vegetace, paseky a nálety`) |>
   pivot_longer(-c(species, region)) |>
   drop_na() |>
   left_join(read_xlsx(r'(C:/Users/krystof/OneDrive - MUNI/2022_Expanzky/HabitatNames-2023-07-03.xlsx)') |>
-  rename(name = Jmeno, habitat = Name)) |>
+              rename(name = Jmeno, habitat = Name)) |>
   distinct(species, region, name = habitat, value) |>
   mutate(name = factor(name, levels = order)) |>
   group_by(species, name) |>
-  count(name= 'value') |>
+  count(name = 'value') |>
   arrange(name) |>
   pivot_wider(values_fill = 0) -> step
 
-
-finlist |> select(new_species = species, species = `species.orig`) |>
+finlist |>
+  select(species) |>
   left_join(step) |>
   write_xlsx(r'(metadata\biotopy_wide_2023_07_04.xlsx)')
