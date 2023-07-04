@@ -1,7 +1,7 @@
 library(writexl)
 library(tidyverse)
 library(readxl)
-read_xlsx(r'(C:/Users/krystof/OneDrive - MUNI/2022_Expanzky/Expanzky_final-list_2023-05-09.xlsx)')
+finlist <- read_xlsx(r'(C:/Users/krystof/OneDrive - MUNI/2022_Expanzky/Expanzky_final-list_2023-05-09.xlsx)')
 Sys.setlocale(locale = 'Czech')
 
 tibble(path = list.files(r'(C:/Users/krystof/OneDrive - MUNI/2022_Expanzky/vyroba_seznamu/Dotazniky)',
@@ -30,5 +30,9 @@ stuff |>
   group_by(species, name) |>
   count(name= 'value') |>
   arrange(name) |>
-  pivot_wider(values_fill = 0) |>
+  pivot_wider(values_fill = 0) -> step
+
+
+finlist |> select(new_species = species, species = `species.orig`) |>
+  left_join(step) |>
   write_xlsx(r'(metadata\biotopy_wide_2023_07_04.xlsx)')
