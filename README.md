@@ -12,10 +12,28 @@
   * Proportion of individual lifeforms of expansive species vs all species in Czech flora.
   * All families included.
 
-* `New_maps.R`: creates `Expansive_plants.pdf`
-  * For Appendix, I suppose
-  * All species included
-
 * `Strategies.R`: creates `Strategies.png`
   * Boxplots of Pierce's indices
   * All families included.
+  * Tested T-test
+
+* `New_maps.R`: creates `Expansive_plants.pdf`
+  * For Appendix, I suppose
+  * All species included
+  * Add legend
+  * Remove page number
+
+* `Vegetative_height`: creates `...`
+  * Facets per individual growth-forms
+
+* `Fytoregiony.R`: creates `...`
+  * Counts per fytoregions
+  * Tested with Anova
+
+* `Dotaznik_counts.R`: creates `...`
+  * Map of frequency of questionnaires
+
+
+* `Habitats.R`: no fucking idea
+* :::::::: Tabulka s biotopama first
+* 

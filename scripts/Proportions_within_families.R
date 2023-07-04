@@ -1,7 +1,7 @@
 library(tidyverse)
 library(readxl)
 
-traity <- read_xlsx(r'(C:/Users/krystof/OneDrive - MUNI/2022_Expanzky/Expanzky_traity_2023-05-09.xlsx)')
+traity <- read_xlsx(r'(C:/Users/krystof/OneDrive - MUNI/2022_Expanzky/Expanzky_traity_2023-07-03.xlsx)')
 
 traity |>
   group_by(family, expansive) |>

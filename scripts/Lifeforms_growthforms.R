@@ -1,13 +1,13 @@
 library(tidyverse)
 library(readxl)
 
-traity <- read_xlsx(r'(C:/Users/krystof/OneDrive - MUNI/2022_Expanzky/Expanzky_traity_2023-05-09.xlsx)')
-
+traity <- read_xlsx(r'(C:/Users/krystof/OneDrive - MUNI/2022_Expanzky/Expanzky_traity_2023-07-03.xlsx)')
+traity |> names()
 bind_rows(traity,
           traity |>
             filter(expansive == 'expansive') |>
             mutate(expansive = 'no')) |>
-  select(species, expansive, `nanophanerophyte`:`therophyte`) |>
+  select(species, expansive, `Tree`:`Therophyte`) |>
   pivot_longer(-c(species, expansive)) |>
   group_by(expansive, name) |>
   count(value) |>
