@@ -15,7 +15,7 @@ bind_rows(traity,
   group_by(expansive) |>
   mutate(prop = (n / sum(n)) * 100,
          prop_plot = ifelse(expansive == 'expansive', prop, -prop)) |>
-  mutate(kind = 'Growth forms') -> lifeforms
+  mutate(kind = 'Life forms') -> lifeforms
 
 bind_rows(traity,
           traity |>
