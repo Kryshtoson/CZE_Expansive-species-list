@@ -3,7 +3,7 @@ library(tidyverse)
 library(readxl)
 
 traity <- read_xlsx(r'(C:/Users/krystof/OneDrive - MUNI/2022_Expanzky/Expanzky_traity_2023-07-03.xlsx)')
-traity |> names()
+
 bind_rows(traity,
           traity |>
             filter(expansive == 'expansive') |>
@@ -13,12 +13,18 @@ bind_rows(traity,
   mutate(height = as.numeric(height)) |>
   mutate(expansive = factor(expansive, levels = c('expansive', 'no'),
                             labels = c('Expansive\nspecies', 'Czech\nflora'))) |>
-  filter(value == 1) |>
-  ggplot(aes(expansive, height)) +
+  filter(value == 1) -> step
+
+step |> ggplot(aes(expansive, height)) +
   geom_violin(aes(fill = expansive), alpha = 1, show.legend = F) +
-  geom_boxplot(width = 0.1, alpha = .2, notch = T) +
+  geom_boxplot(data = step |>
+    filter(!(expansive == 'Expansive\nspecies' & name %in% c('Hydrophyte', 'Chamaephyte'))),
+               width = 0.1, alpha = .2, notch = T) +
+  geom_jitter(data = step |>
+    filter(expansive == 'Expansive\nspecies' & name %in% c('Hydrophyte', 'Chamaephyte')),
+               width = 0, height = 0) +
   scale_fill_manual(values = c('#FFC300', 'grey88')) +
-  stat_compare_means(method = 't.test', hjust = 1, size = 3,
+  stat_compare_means(hjust = 1, size = 3,
                      label.y.npc = 1, label.x = 2.3) +
   facet_wrap(~name, scales = 'free', ncol = 2) +
   coord_flip() +

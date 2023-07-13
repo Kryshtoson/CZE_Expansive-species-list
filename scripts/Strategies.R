@@ -8,8 +8,7 @@ traity |>
   mutate(`S-PIERCE` = as.numeric(`S-PIERCE`)) |>
   filter(`S-PIERCE` > .5 & expansive == 'expansive') |>
   select(species, `S-PIERCE`) |>
-  arrange(`S-PIERCE`) |>
-  view()
+  arrange(`S-PIERCE`)
 
 bind_rows(traity,
           traity |>
@@ -26,7 +25,7 @@ bind_rows(traity,
   #geom_boxplot(aes(fill = expansive), ) +
   geom_boxplot(width = 0.1, alpha = .2, notch = T) +
   scale_fill_manual(values = c('grey88', '#FFC300')) +
-  stat_compare_means(method = 't.test', hjust = 0, size = 3) +
+  stat_compare_means(hjust = 0, size = 3) +
   facet_grid(~name, scales = 'free') +
   expand_limits(y = 110) +
   theme_bw() +
