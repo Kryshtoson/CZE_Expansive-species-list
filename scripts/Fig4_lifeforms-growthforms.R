@@ -43,7 +43,7 @@ bind_rows(lifeforms, lifehistory) |>
                      labels = c('0%', rep(c('50%', '100%'), each = 2)),
                      expand = c(1.3, 1.3)) +
   scale_fill_manual(values = c('#FFC300', 'grey88'),
-                    labels = c('Expansive', 'Native')) +
+                    labels = c('Expansive', 'Non expansive')) +
   theme_bw() +
   labs(y = 'Proportion of species') +
   theme(panel.border = element_blank(),

@@ -37,7 +37,7 @@ traity |>
                      labels = c('0%', rep(c('5%', '10%', '15%', '20%', '25%'), each = 2)),
                      expand = c(.3, .3)) +
   scale_fill_manual(values = c('#FFC300', 'grey88'),
-                    labels = c('Expansive', 'Native')) +
+                    labels = c('Expansive', 'Non expansive')) +
   theme_bw() +
   labs(y = 'Proportion of species') +
   theme(legend.position = c(1, 0),

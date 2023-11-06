@@ -7,7 +7,7 @@ traity <- read_xlsx(r'(C:/Users/krystof/OneDrive - MUNI/2022_Expanzky/expanzky_t
 traity |>
   filter(origin == 'native') |>
   mutate(expansive = factor(expansive, levels = c('no', 'expansive'),
-                            labels = c('Native flora', 'Expansive species'))) |>
+                            labels = c('Non expansive', 'Expansive'))) |>
   select(species, expansive, `C-PIERCE`:`R-PIERCE`) |>
   pivot_longer(`C-PIERCE`:`R-PIERCE`) |>
   mutate(name = gsub('-PIERCE', '', name),

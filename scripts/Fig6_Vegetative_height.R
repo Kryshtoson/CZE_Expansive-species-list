@@ -11,7 +11,7 @@ traity |>
   pivot_longer(-c(species, expansive, height)) |>
   mutate(height = as.numeric(height)) |>
   mutate(expansive = factor(expansive, levels = c('expansive', 'no'),
-                            labels = c('Expansive', 'Native'))) |>
+                            labels = c('Expansive', 'Non expansive'))) |>
   filter(value == 1) |>
   mutate(name = factor(name, levels = order))-> step
 
